@@ -1,0 +1,138 @@
+/* ===== RESET E BASE ===== */
+body {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+/* ===== LAYOUT ===== */
+.page-container {
+  padding: 2rem;
+}
+
+h1 {
+  color: var(--cor-primaria);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== BOTÕES ===== */
+button,
+.btn-novo,
+.btn-salvar,
+.btn-cancelar {
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+}
+
+.btn-novo {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca);
+  margin-bottom: 1.5rem;
+}
+
+.btn-novo:hover {
+  background-color: var(--cor-secundaria);
+}
+
+.btn-salvar {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca);
+}
+
+.btn-salvar:hover {
+  background-color: var(--cor-secundaria);
+}
+
+.btn-cancelar {
+  background-color: #ccc;
+  color: var(--cor-texto);
+}
+
+.btn-cancelar:hover {
+  background-color: #bdbdbd;
+}
+
+/* ===== TABELAS ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--cor-branca);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca);
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+tbody tr:hover {
+  background-color: var(--cor-hover);
+}
+
+/* ===== MODAL ===== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal-content {
+  background: var(--cor-branca);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: var(--cor-primaria);
+  text-align: center;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--cor-borda);
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.modal-content input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 4px rgba(255, 77, 0, 0.3);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}

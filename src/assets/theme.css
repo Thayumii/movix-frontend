@@ -1,0 +1,9 @@
+:root {
+  --cor-primaria: #ff4d00; /* Laranja forte */
+  --cor-secundaria: #ff6633; /* Laranja claro */
+  --cor-fundo: #f8f8f8;
+  --cor-texto: #333;
+  --cor-borda: #ddd;
+  --cor-branca: #fff;
+  --cor-hover: #ffe9e0;
+}
