@@ -1,22 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-//import './Sidebar.css';
+import { Link, useLocation } from 'react-router-dom';
+import './Sidebar.css';
 
 const Sidebar = () => {
+    const location = useLocation();
+
     return (
         <div className="sidebar">
             <div className="sidebar-header">
-                Movix
+                <i class="bi bi-truck"></i> Movix
             </div>
             <nav className="sidebar-nav">
-                <Link to="/">Dashboard</Link>
-                <Link to="/">Clientes</Link>
-                <Link to="/">Pedidos</Link>
-                <Link to="/">Entregas</Link>
+                <Link className={location.pathname === '/' && 'active'} to="/"><i class="bi bi-columns-gap"></i> Dashboard</Link>
+                <Link className={location.pathname === '/clientes' && 'active'} to="/clientes"> <i class="bi bi-people"></i> Clientes</Link>
+                <Link className={location.pathname === '/pedidos' && 'active'} to="/pedidos"><i class="bi bi-box-seam"></i> Pedidos</Link>
+                <Link className={location.pathname === '/entregas' && 'active'} to="/entregas"><i class="bi bi-geo-alt"></i> Entregas</Link>
             </nav>
-            <div className="sidebar-footer">
+            {/* <div className="sidebar-footer">
                 Admin
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -1,0 +1,8 @@
+.layout-container {
+    display: flex;
+    
+    .content-container {
+        margin-left: 298px;
+        padding: 24px;
+    }
+}

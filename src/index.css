@@ -136,3 +136,11 @@ tbody tr:hover {
   justify-content: space-between;
   margin-top: 1rem;
 }
+
+:root {
+  --primary-color: #bf1d1a;
+  --primary-color-hover: rgba(191, 29, 26, 0.25);
+  --secondary-color: #e46202;
+  --gray-color: #050505;
+  --white-color: #ffffff;
+}
