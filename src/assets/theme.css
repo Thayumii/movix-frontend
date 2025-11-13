@@ -6,4 +6,12 @@
   --cor-borda: #ddd;
   --cor-branca: #fff;
   --cor-hover: #ffe9e0;
+
+  --primary-color: #bf1d1a;
+  --primary-color-hover: rgba(191, 29, 26, 0.25);
+  --primary-color-background: rgba(191, 29, 26, 0.03);
+  --secondary-color: #e46202;
+  --gray-color: #050505;
+  --gray-color-hover: rgba(5, 5, 5, 0.15);
+  --white-color: #ffffff;
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import * as api from '../services/api';
-//import './Clientes.css';
+// import './Clientes.css';
 //import '../components/Modal.css';
 
 const Clientes = () => {
     const [clientes, setClientes] = useState([]);
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [novoCliente, setNovoCliente] = useState({
@@ -66,20 +67,27 @@ const Clientes = () => {
     };
     return (
         <div className="page-container">
-            <h1>Clientes</h1>
-            <button onClick={() => setIsModalOpen(true)} className="btn-novo">
-                + Novo Cliente
-            </button>
+            <div className="page-header">
+                <div>
+                    <h1>Clientes</h1>
+                    <h4>Gerencie seus clientes</h4>
+                </div>
+                <button onClick={() => setIsModalOpen(true)} className="btn-novo">
+                    + Novo Cliente
+                </button>
+            </div>
 
             {/* LISTA DE CLIENTES */}
             <table>
                 <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Telefone</th>
-                        <th>Cidade</th>
-                    </tr>
+                    {clientes.length > 0 && (
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Cidade</th>
+                        </tr>
+                    )}
                 </thead>
                 <tbody>
                     {clientes.length > 0 ? (
@@ -91,10 +99,10 @@ const Clientes = () => {
                                 <td>{cliente.cidade}</td>
                             </tr>
                         ))
-                    ): (
-                        <tr>
-                            <td colSpan="4">Nenhum cliente cadastrado</td>
-                        </tr>
+                    ) : (
+                        <div className="list-empty">
+                            <i class="bi bi-envelope"></i> <br />Nenhum cliente cadastrado
+                        </div>
                     )}
                 </tbody>
             </table>

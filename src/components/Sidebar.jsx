@@ -8,7 +8,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebar-header">
-                <i class="bi bi-truck"></i> Movix
+                <i className="bi bi-truck"></i> Movix
             </div>
             <nav className="sidebar-nav">
                 <Link className={location.pathname === '/' && 'active'} to="/"><i class="bi bi-columns-gap"></i> Dashboard</Link>
