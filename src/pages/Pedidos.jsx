@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import * as api from '../services/api';
+import * as api from '../services/api'
+import { Modal, ModalBackground, Table, Button, ModalActions, ListEmpty, Container } from './base.js'
+import Loading from "../components/Loading/index.jsx"
+
+import { MOCK_PEDIDOS } from '../services/mocks.js'
+
 
 const Pedidos = () => {
     const [pedidos, setPedidos] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [novoPedido, setNovoPedido] = useState({
@@ -17,14 +23,23 @@ const Pedidos = () => {
         carregarPedidos();
     }, []);
 
+    // const carregarPedidos = async () => {
+    //     // simula delay de API
+    //     setTimeout(() => {
+    //         setPedidos(MOCK_PEDIDOS)
+    //     }, 500)
+    // }
     const carregarPedidos = async () => {
         try {
+            setLoading(true)
             const response = await api.getPedidos();
             setPedidos(response.data);
         } catch (error) {
             console.error("Erro ao carregar pedidos:", error);
+        } finally {
+            setLoading(false)
         }
-    };
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -62,14 +77,20 @@ const Pedidos = () => {
     };
 
     return (
-        <div className="page-container">
-            <h1>Pedidos</h1>
-            <button onClick={() => setIsModalOpen(true)} className="btn-novo">
-                + Novo Pedido
-            </button>
+        <Container>
+            <div className="header">
+                <div>
+                    <h1>Pedidos</h1>
+                    <h4>Gerencie seus pedidos</h4>
+                </div>
+                <Button onClick={() => setIsModalOpen(true)} variant="novo">
+                    + Novo Pedido
+                </Button>
+            </div>
 
-            <table>
+            <Table>
                 <thead>
+                {pedidos.length > 0 && (
                     <tr>
                         <th>Descrição</th>
                         <th>Origem</th>
@@ -77,6 +98,7 @@ const Pedidos = () => {
                         <th>Peso</th>
                         <th>Cliente</th>
                     </tr>
+                )}
                 </thead>
                 <tbody>
                     {pedidos.length > 0 ? (
@@ -89,17 +111,29 @@ const Pedidos = () => {
                                 <td>{pedido.cliente?.nome || pedido.cliente?.id || 'Sem cliente'}</td>
                             </tr>
                         ))
+                    ) : loading ? (
+                        <tr>
+                            <td colSpan={5}>
+                                <Loading variant="sync" />
+                            </td>
+                        </tr>
                     ) : (
                         <tr>
-                            <td colSpan="5">Nenhum pedido cadastrado</td>
+                            <td colSpan={5}>
+                                <ListEmpty>
+                                    <i className="bi bi-inbox"></i>
+                                    <br />
+                                    Nenhum pedido cadastrado
+                                </ListEmpty>
+                            </td>
                         </tr>
                     )}
                 </tbody>
-            </table>
+            </Table>
 
             {isModalOpen && (
-                <div className="modal-backdrop">
-                    <div className="modal-content">
+                <ModalBackground>
+                    <Modal>
                         <h2>Novo Pedido</h2>
                         <form onSubmit={handleSubmit}>
                             <input
@@ -138,15 +172,15 @@ const Pedidos = () => {
                                 placeholder="ID do Cliente *"
                                 required
                             />
-                            <div className="modal-actions">
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <button type="button" onClick={() => setIsModalOpen(false)} className="btn-cancelar">Cancelar</button>
-                            </div>
+                            <ModalActions>
+                                <Button type="submit" variant="salvar">Salvar</Button>
+                                <Button type="button" onClick={() => setIsModalOpen(false)} variant="cancelar">Cancelar</Button>
+                            </ModalActions>
                         </form>
-                    </div>
-                </div>
+                    </Modal>
+                </ModalBackground>
             )}
-        </div>
+        </Container>
     );
 };
 

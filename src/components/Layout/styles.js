@@ -1,4 +1,6 @@
-.layout-container {
+import styled from 'styled-components'
+
+export const LayoutContainer = styled.div`
     display: flex;
     
     .content-container {
@@ -6,4 +8,4 @@
         padding: 8px;
         width: 100%;
     }
-}
+`

@@ -11,14 +11,16 @@ import './index.css';
 function App() {
   return (
     <BrowserRouter>
-    <Layout>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/clientes" element={<Clientes />} />
-        <Route path="/pedidos" element={<Pedidos />} />
-        <Route path="/entregas" element={<Entregas />} />
+        <Route path="/" element={<div>Menu</div>} />
+
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/clientes" element={<Clientes />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/entregas" element={<Entregas />} />
+        </Route>
       </Routes>
-    </Layout>
     </BrowserRouter>
   );
 }

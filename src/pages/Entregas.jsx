@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as api from '../services/api';
-//import './Entregas.css';
-//import '../components/Modal.css';
+import { Modal, ModalBackground, Table, Button, ModalActions, ListEmpty, Container } from './base.js'
+import Loading from "../components/Loading/index.jsx"
+import { MOCK_ENTREGAS } from '../services/mocks.js'
 
 const Entregas = () => {
     const [entregas, setEntregas] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [novaEntrega, setNovaEntrega] = useState({
@@ -20,12 +22,21 @@ const Entregas = () => {
         carregarEntregas();
     }, []);
 
+    // const carregarEntregas = async () => {
+    //     // simula delay de API
+    //     setTimeout(() => {
+    //         setEntregas(MOCK_ENTREGAS)
+    //     }, 500)
+    // }
     const carregarEntregas = async () => {
         try {
+            setLoading(true)
             const response = await api.getEntregas();
             setEntregas(response.data);
         } catch (error) {
             console.error("Erro ao carregar entregas:", error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -62,25 +73,32 @@ const Entregas = () => {
         } catch (error) {
             console.error("Erro ao salvar entrega:", error);
         }
-    };
+    }
 
     return (
-        <div className="page-container">
-            <h1>Entregas</h1>
-            <button onClick={() => setIsModalOpen(true)} className="btn-novo">
-                + Nova Entrega
-            </button>
+        <Container>
+            <div className="header">
+                <div>
+                    <h1>Entregas</h1>
+                    <h4>Gerencie suas entregas</h4>
+                </div>
+                <Button onClick={() => setIsModalOpen(true)} variant="novo">
+                    + Nova Entrega
+                </Button>
+            </div>
 
             {/* LISTA DE ENTREGAS */}
-            <table>
+            <Table>
                 <thead>
-                    <tr>
-                        <th>Motorista</th>
-                        <th>Placa</th>
-                        <th>Data Prevista</th>
-                        <th>Pedido</th>
-                        <th>Status</th>
-                    </tr>
+                    {entregas.length > 0 && (
+                        <tr>
+                            <th>Motorista</th>
+                            <th>Placa</th>
+                            <th>Data Prevista</th>
+                            <th>Pedido</th>
+                            <th>Status</th>
+                        </tr>
+                    )}
                 </thead>
                 <tbody>
                     {entregas.length > 0 ? (
@@ -93,18 +111,30 @@ const Entregas = () => {
                                 <td>{entrega.status}</td>
                             </tr>
                         ))
+                    ) : loading ? (
+                    <tr>
+                        <td colSpan={5}>
+                            <Loading variant="sync" />
+                        </td>
+                    </tr>
                     ) : (
-                        <tr>
-                            <td colSpan="5">Nenhuma entrega cadastrada</td>
-                        </tr>
+                    <tr>
+                        <td colSpan={5}>
+                            <ListEmpty>
+                                <i className="bi bi-inbox"></i>
+                                <br />
+                                Nenhuma entrega cadastrada
+                            </ListEmpty>
+                        </td>
+                    </tr>
                     )}
                 </tbody>
-            </table>
+            </Table>
 
             {/* MODAL DE NOVA ENTREGA */}
             {isModalOpen && (
-                <div className="modal-backdrop">
-                    <div className="modal-content">
+                <ModalBackground>
+                    <Modal>
                         <h2>Nova Entrega</h2>
                         <form onSubmit={handleSubmit}>
                             <input
@@ -145,15 +175,15 @@ const Entregas = () => {
                                 required
                             />
 
-                            <div className="modal-actions">
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <button type="button" onClick={() => setIsModalOpen(false)} className="btn-cancelar">Cancelar</button>
-                            </div>
+                            <ModalActions>
+                                <button type="submit" variant="salvar">Salvar</button>
+                                <button type="button" onClick={() => setIsModalOpen(false)} variant="cancelar">Cancelar</button>
+                            </ModalActions>
                         </form>
-                    </div>
-                </div>
+                    </Modal>
+                </ModalBackground>
             )}
-        </div>
+        </Container>
     );
 };
 

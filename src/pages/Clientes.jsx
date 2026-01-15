@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import * as api from '../services/api';
-// import './Clientes.css';
-//import '../components/Modal.css';
+import { Modal, ModalBackground, Table, Button, ModalActions, ListEmpty, Container } from './base.js'
+import Loading from "../components/Loading/index.jsx"
+
+import { MOCK_CLIENTES } from '../services/mocks.js'
 
 const Clientes = () => {
     const [clientes, setClientes] = useState([]);
-    
+    const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [novoCliente, setNovoCliente] = useState({
@@ -26,14 +28,24 @@ const Clientes = () => {
         carregarClientes();
     }, []);
 
+    // const carregarClientes = async () => {
+    //     // simula delay de API
+    //     setTimeout(() => {
+    //         setClientes(MOCK_CLIENTES)
+    //     }, 500)
+    // }
     const carregarClientes = async () => {
         try {
+            setLoading(true)
             const response = await api.getClientes();
             setClientes(response.data);
         } catch (error) {
             console.error("Erro ao carregar clientes:", error);
+        } finally {
+            setLoading(false)
         }
-    };
+    }
+
     // controla as mudanças dos inputs
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -65,20 +77,21 @@ const Clientes = () => {
             console.error("Erro ao salvar cliente:", error);
         }
     };
+
     return (
-        <div className="page-container">
-            <div className="page-header">
+        <Container>
+            <div className="header">
                 <div>
                     <h1>Clientes</h1>
                     <h4>Gerencie seus clientes</h4>
                 </div>
-                <button onClick={() => setIsModalOpen(true)} className="btn-novo">
+                <Button onClick={() => setIsModalOpen(true)} variant="novo">
                     + Novo Cliente
-                </button>
+                </Button>
             </div>
 
             {/* LISTA DE CLIENTES */}
-            <table>
+            <Table>
                 <thead>
                     {clientes.length > 0 && (
                         <tr>
@@ -99,18 +112,30 @@ const Clientes = () => {
                                 <td>{cliente.cidade}</td>
                             </tr>
                         ))
+                    ) : loading ? (
+                        <tr>
+                            <td colSpan={5}>
+                                <Loading variant="sync" />
+                            </td>
+                        </tr>
                     ) : (
-                        <div className="list-empty">
-                            <i class="bi bi-envelope"></i> <br />Nenhum cliente cadastrado
-                        </div>
+                        <tr>
+                            <td colSpan={5}>
+                                <ListEmpty>
+                                    <i className="bi bi-person-x"></i>
+                                    <br />
+                                    Nenhum cliente cadastrado
+                                </ListEmpty>
+                            </td>
+                        </tr>
                     )}
                 </tbody>
-            </table>
+            </Table>
 
             {/*MODAL DE NOVO CLIENTE*/}
             {isModalOpen && (
-                <div className="modal-backdrop">
-                    <div className="modal-content">
+                <ModalBackground>
+                    <Modal>
                         <h2>Novo Cliente</h2>
                         <form onSubmit={handleSubmit}>
                             <input name="nome" value={novoCliente.nome} onChange={handleInputChange} placeholder="Nome *"/>
@@ -125,15 +150,15 @@ const Clientes = () => {
                             <input name="complemento" value={novoCliente.complemento} onChange={handleInputChange} placeholder="Complemento *"/>
                             <input name="pontoReferencia" value={novoCliente.pontoReferencia} onChange={handleInputChange} placeholder="Ponto de Referência *"/>
 
-                            <div className="modal-actions">
-                                <button type="submit" className="btn-salvar">Salvar</button>
-                                <button type="button" onClick={() => setIsModalOpen(false)} className="btn-cancelar">Cancelar</button> 
-                            </div>
+                            <ModalActions className="modal-actions">
+                                <Button type="submit" variant="salvar">Salvar</Button>
+                                <Button type="button" onClick={() => setIsModalOpen(false)} variant="cancelar">Cancelar</Button>
+                            </ModalActions>
                         </form>
-                    </div>
-                </div>
+                    </Modal>
+                </ModalBackground>
             )}
-        </div>
+        </Container>
     );
 };
 export default Clientes;
