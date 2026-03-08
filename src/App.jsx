@@ -5,20 +5,24 @@ import Dashboard from './pages/Dashboard';
 import Clientes from './pages/Clientes';
 import Pedidos from './pages/Pedidos';
 import Entregas from './pages/Entregas';
+import Login from './pages/Login';
 import './assets/theme.css';
 import './index.css';
+import ProtectedRoute from "./services/ProtectedRoute.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>Menu</div>} />
+        <Route path="/" element={<Login />} />
 
-        <Route element={<Layout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/clientes" element={<Clientes />} />
-          <Route path="/pedidos" element={<Pedidos />} />
-          <Route path="/entregas" element={<Entregas />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/clientes" element={<Clientes />} />
+              <Route path="/pedidos" element={<Pedidos />} />
+              <Route path="/entregas" element={<Entregas />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
