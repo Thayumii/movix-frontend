@@ -25,11 +25,11 @@ const Login = () => {
                 <h2>LOGIN</h2>
                 <InputContainer>
                     <label htmlFor="email">E-mail:</label>
-                    <input type="text" id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" id={"email"} value={email} onChange={(e) => setEmail(e.target.value)} />
                 </InputContainer>
                 <InputContainer>
                     <label htmlFor="password">Senha:</label>
-                    <input type="text" id={"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type={"password"} id={"password"} value={password} onChange={(e) => setPassword(e.target.value)} />
                 </InputContainer>
                 <button type={"button"} onClick={handleLogin}>
                     Entrar
