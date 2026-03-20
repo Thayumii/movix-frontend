@@ -1,10 +1,12 @@
 import { HeaderContainer } from "./styles.js";
+import MOVIX_LOGO from '../../assets/MOVIX-LOGO.png'
+
 
 const Header = () => {
     return (
         <HeaderContainer>
             <div className="container">
-                <image></image>
+                <img src={MOVIX_LOGO} alt="Movix Logo" width={"200px"} />
                 <nav>
                     <a href="">HOME</a>
                     <a href="">SOBRE NÓS</a>

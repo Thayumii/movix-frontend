@@ -1,7 +1,12 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
-        background-color: var(--cor-primaria);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: 100%;
+        /* background-color: var(--cor-primaria); */
         padding: 32px;
     
     div {
