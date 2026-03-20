@@ -31,5 +31,58 @@ export const HeroSection = styled.section`
 `
 
 export const FormSection = styled.form`
-    
+    background-color: var(--cor-primaria);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 16px;
+    width: fit-content;
+    margin-top: 48px;
+
+
+    label {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        width: fit-content;
+    }
+
+    input {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        width: 300px;
+        margin-right: 16px;
+
+        &:focus {
+            outline: solid;
+            outline-color: var(--cor-secundaria);
+        }
+    }
+
+    button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--cor-secundaria);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 16px;
+
+        &:hover {
+            filter: brightness(90%);
+        }
+    }
+
+    .erro {
+        color: #ff0000 !important;
+        font-weight: normal !important;
+        font-size: 12px !important;
+        margin-top: 4px;
+        width: fit-content !important;
+    }
+
 `
