@@ -6,6 +6,7 @@ import Clientes from './pages/Clientes';
 import Pedidos from './pages/Pedidos';
 import Entregas from './pages/Entregas';
 import Login from './pages/Login';
+import Home from "./pages/Home/index.jsx";
 import './assets/theme.css';
 import './index.css';
 import ProtectedRoute from "./services/ProtectedRoute.jsx";
@@ -14,7 +15,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
