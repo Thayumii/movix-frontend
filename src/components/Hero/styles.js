@@ -9,4 +9,27 @@ export const HeroSection = styled.section`
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        height: 100%;
+
+        h2 {
+            color: #fff;
+            font-size: 48px;
+            width: 700px;
+        }
+        p {
+            color: #dfdfdf;
+            font-size: 24px;
+            width: 700px;
+        }
+    }
+`
+
+export const FormSection = styled.form`
+    
 `

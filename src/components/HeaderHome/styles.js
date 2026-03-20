@@ -1,14 +1,19 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export const HeaderContainer = styled.header`
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 50;
-        width: 100%;
-        /* background-color: var(--cor-primaria); */
-        padding: 32px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    /* background-color: var(--cor-primaria); */
+    padding: 32px;
     
+    h1 {
+        max-height: 49px;
+    }
+
     div {
         display: flex;
         justify-content: space-between;
