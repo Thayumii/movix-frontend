@@ -7,6 +7,7 @@ import Pedidos from './pages/Pedidos';
 import Entregas from './pages/Entregas';
 import Login from './pages/Login';
 import Home from "./pages/Home/index.jsx";
+import Rastreio from "./pages/Rastreio/index.jsx";
 import './assets/theme.css';
 import './index.css';
 import ProtectedRoute from "./services/ProtectedRoute.jsx";
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/rastreio" element={<Rastreio />} />
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>

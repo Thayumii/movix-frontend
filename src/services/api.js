@@ -31,6 +31,7 @@ export const getPedidosById = (id) => apiClient.get(`/pedidos/${id}`);
 export const createPedido = (pedidoData) => apiClient.post('/pedidos', pedidoData);
 export const updatePedido = (id, pedidoData) => apiClient.put(`/pedidos/${id}`);
 export const deletePedido = (id) => apiClient.delete(`/pedidos/${id}`);
+export const rastreioPedido = (codigoRastreio) => apiClient.get(`/pedidos/rastreio/${codigoRastreio}`)
 
 // API DE ENTREGAS
 export const getEntregas = () => apiClient.get('/entregas');

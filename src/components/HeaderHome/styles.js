@@ -7,11 +7,12 @@ export const HeaderContainer = styled.header`
     left: 0;
     z-index: 50;
     width: 100%;
-    /* background-color: var(--cor-primaria); */
+    background-color: ${({isHome}) => isHome ? 'transparent' : 'var(--cor-primaria)'};
     padding: 32px;
     
     h1 {
         max-height: 49px;
+        cursor: pointer;
     }
 
     div {
@@ -35,7 +36,7 @@ export const HeaderContainer = styled.header`
 
             &:hover {
                 /* text-decoration: underline; */
-                background-color: rgba(0,0,0,0.15);
+                background-color: ${({isHome}) => isHome ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'};
 
             }
         }
